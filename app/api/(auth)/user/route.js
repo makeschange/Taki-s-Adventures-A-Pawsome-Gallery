@@ -3,6 +3,8 @@ import User from "@/lib/model/userModel";
 import connectDB from "@/lib/db";
 
 export const GET = async (req) => {
+  console.log("request user: ", req.currentUser);
+
   try {
     await connectDB();
     const user = await User.find();
