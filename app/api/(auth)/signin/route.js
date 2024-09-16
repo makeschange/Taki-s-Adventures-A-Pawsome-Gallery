@@ -18,17 +18,20 @@ export const POST = async (req) => {
     await connectDB();
 
     // check email if existing
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
-      return NextResponse.json({ message: "Invalid email!" }, { status: 404 });
+      return NextResponse.json(
+        { message: "It seems that you have use  an incorrect email." },
+        { status: 404 }
+      );
     }
 
     // confirm password
     const isPasswordMatch = await user.comparePassword(password);
     if (!isPasswordMatch) {
       return NextResponse.json(
-        { message: "Password does not match!" },
+        { message: "It seems that you have use  an incorrect password." },
         { status: 404 }
       );
     }
@@ -40,6 +43,8 @@ export const POST = async (req) => {
       { status: 200 }
     );
   } catch (error) {
+    console.log(error);
+
     return NextResponse.json(
       { message: "Error", error: error.message },
       { status: 500 }

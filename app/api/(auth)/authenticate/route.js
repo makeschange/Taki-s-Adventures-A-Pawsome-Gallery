@@ -4,8 +4,6 @@ import connectDB from "@/lib/db";
 import { jwtVerify } from "jose";
 
 export const POST = async (req) => {
-  console.log("fetching...");
-
   try {
     const body = await req.json();
     const { token } = body;

@@ -9,6 +9,7 @@ function checkRoutePath(req) {
     "/api/signin",
     "/api/signup",
     "/api/authenticate",
+    "/api/category",
   ];
 
   if (!excludedRoutes.includes(url.pathname)) {

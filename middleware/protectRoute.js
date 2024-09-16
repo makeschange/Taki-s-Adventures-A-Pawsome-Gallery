@@ -17,15 +17,20 @@ async function protectRoute(req) {
   }
 
   try {
-    const apiUrl = getUrl(req, "/api/authenticate");
-
-    const result = await axios.post(apiUrl, { token });
-
-    console.log("result.data: ", result.data);
+    const result = await axios.post(`${req.nextUrl.origin}/api/authenticate`, {
+      token,
+    });
 
     req.currentUser = await result.data;
 
-    return NextResponse.next();
+    const response = NextResponse.next();
+
+    response.cookies.set("user", JSON.stringify(result.data), {
+      httpOnly: true,
+      sameSite: "strict",
+    });
+
+    return response;
   } catch (error) {
     return NextResponse.json(
       { message: "Error", error: error.message },

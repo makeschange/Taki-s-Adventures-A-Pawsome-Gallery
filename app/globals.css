@@ -16,6 +16,39 @@ html {
 body {
   height: 100%;
   margin: 0;
-  background: linear-gradient(180deg, #232029, #231e2d);
   color: #ddd8e4;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
+}
+
+@layer components {
+  .wrapper {
+    @apply max-w-[1600px] w-full mx-auto relative
+  }
+}
+
+.my-masonry-grid {
+  display: -webkit-box; /* Not needed if autoprefixing */
+  display: -ms-flexbox; /* Not needed if autoprefixing */
+  display: flex;
+  margin-left: -30px; /* gutter size offset */
+  width: auto;
+}
+.my-masonry-grid_column {
+  padding-left: 30px; /* gutter size */
+  background-clip: padding-box;
+}
+.my-masonry-grid_column > div{
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+  background: grey;
+  margin-bottom: 30px;
 }

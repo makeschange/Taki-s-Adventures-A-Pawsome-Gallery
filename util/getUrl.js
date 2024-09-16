@@ -1,5 +1,5 @@
-function getUrl(req, pathname) {
-  return `${req.nextUrl.origin}${pathname}`;
+function getUrl(pathname) {
+  return `${window.location.origin}${pathname}`;
 }
 
 export default getUrl;
